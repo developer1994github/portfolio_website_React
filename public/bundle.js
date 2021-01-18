@@ -1067,7 +1067,7 @@
           }
           return dispatcher.useContext(Context, unstable_observedBits);
         }
-        function useState(initialState) {
+        function useState2(initialState) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useState(initialState);
         }
@@ -1079,7 +1079,7 @@
           var dispatcher = resolveDispatcher();
           return dispatcher.useRef(initialValue);
         }
-        function useEffect(create, deps) {
+        function useEffect2(create, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useEffect(create, deps);
         }
@@ -1352,13 +1352,13 @@
         exports.useCallback = useCallback;
         exports.useContext = useContext;
         exports.useDebugValue = useDebugValue;
-        exports.useEffect = useEffect;
+        exports.useEffect = useEffect2;
         exports.useImperativeHandle = useImperativeHandle;
         exports.useLayoutEffect = useLayoutEffect;
         exports.useMemo = useMemo;
         exports.useReducer = useReducer;
         exports.useRef = useRef;
-        exports.useState = useState;
+        exports.useState = useState2;
         exports.version = ReactVersion;
       })();
     }
@@ -19328,25 +19328,32 @@ For more info, visit https://fb.me/react-mock-scheduler`);
   // src/App.js
   const React = __toModule(require_react());
   const ReactDOM = __toModule(require_react_dom());
-  const App = () => {
+  const {useState, useEffect} = React;
+  function App() {
+    const [counter, setCounter] = useState(0);
+    const images = [
+      "https://upload.wikimedia.org/wikipedia/commons/c/c9/Moon.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/7/78/Image.jpg",
+      "https://images.pexels.com/photos/34950/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+    ];
+    useEffect(() => {
+      const interval = setInterval(() => {
+        if (counter >= 2) {
+          setCounter(0);
+        } else {
+          setCounter((counter2) => counter2 + 1);
+        }
+      }, 3e3);
+      return () => {
+        clearInterval(interval);
+      };
+    });
     return React.createElement("div", null, React.createElement("div", {
       id: "header"
-    }, React.createElement("h1", null, "Software Developer"), React.createElement("h3", null, "Patrick Daly"), React.createElement("h6", null, "pgldaly@gmail.com")), React.createElement("div", {
-      id: "slideshow"
-    }, React.createElement("div", {
-      id: "slide_0",
-      class: "slides"
-    }, React.createElement("img", {
-      src: "https://wallpaperaccess.com/full/36296.jpg"
-    })), React.createElement("div", {
-      id: "slide_1",
-      class: "slides"
-    }, React.createElement("img", {
-      src: "https://wallpaperaccess.com/full/36296.jpg"
-    }))));
-  };
-  ReactDOM.render(React.createElement("div", {
-    className: "App"
-  }, React.createElement(App, null)), document.getElementById("root"));
+    }, React.createElement("h1", null, "Software Developer"), React.createElement("h3", null, "Patrick Daly"), React.createElement("h6", null, "pgldaly@gmail.com")), React.createElement("img", {
+      src: images[counter]
+    }));
+  }
+  ReactDOM.render(React.createElement(App, null), document.getElementById("root"));
 })();
 //# sourceMappingURL=bundle.js.map
