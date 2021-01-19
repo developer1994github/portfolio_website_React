@@ -28,9 +28,12 @@ function App() {
 
   return <div>
     <div id="header">
-      <h1>Software Developer</h1>
-      <h3>Patrick Daly</h3>
-      <h6>pgldaly@gmail.com</h6>
+      <div class="left">
+        <h1>Software Developer</h1>
+        <h3>Patrick Daly</h3>
+        <h6>pgldaly@gmail.com</h6>
+      </div>
+      <img class="right" src="https://assets.stickpng.com/images/588a6507d06f6719692a2d15.png"/>
     </div>
     <img src={images[counter]}></img>
   </div>;

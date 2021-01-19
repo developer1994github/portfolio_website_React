@@ -19350,7 +19350,12 @@ For more info, visit https://fb.me/react-mock-scheduler`);
     });
     return React.createElement("div", null, React.createElement("div", {
       id: "header"
+    }, React.createElement("div", {
+      class: "left"
     }, React.createElement("h1", null, "Software Developer"), React.createElement("h3", null, "Patrick Daly"), React.createElement("h6", null, "pgldaly@gmail.com")), React.createElement("img", {
+      class: "right",
+      src: "https://assets.stickpng.com/images/588a6507d06f6719692a2d15.png"
+    })), React.createElement("img", {
       src: images[counter]
     }));
   }
